@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>DESAK — Account</title>
+
+<style>
+  :root{
+    --bg:#0f0f10;
+    --card:#ffffff;
+    --muted:#777;
+    --accent:#000;
+    --glass: rgba(255,255,255,0.06);
+  }
+  html,body{
+    height:100%;
+    margin:0;
+    font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  }
+  body{
+    background:
+      radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 10%),
+      linear-gradient(180deg, #0b0b0b 0%, #111 100%);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:48px 16px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 600px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(6px);
+    animation: fadeIn .4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  .title-area {
+    margin-bottom: 28px;
+  }
+  .title-area h1 {
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+    color:#fff;
+  }
+  .title-area p {
+    margin:4px 0 0;
+    color:var(--muted);
+    font-size:14px;
+  }
+
+  .section {
+    margin-bottom: 26px;
+    padding:16px;
+    border-radius:12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  label { 
+    display:block;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:4px;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width:95%;
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    color:#fff;
+  }
+
+  .btn {
+    margin-top:12px;
+    width:100%;
+    padding:12px;
+    background:#fff;
+    color:#000;
+    border:none;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+  }
+  .btn:hover { background:#e7e7e7; }
+
+  .logout-btn {
+    background:#900;
+    color:#fff;
+  }
+  .logout-btn:hover { background:#b00; }
+
+  #statusNote {
+    margin-top:10px;
+    font-size:14px;
+    color:#c5e1a5;
+    opacity:0;
+    transition:opacity .25s;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="title-area">
+    <h1>Account</h1>
+    <p>Manage your personal information</p>
+  </div>
+
+  <!-- USER INFO -->
+  <div class="section">
+    <label>Full Name</label>
+    <input id="nameInput" type="text" placeholder="Your name">
+    <button id="saveName" class="btn">Save name</button>
+  </div>
+
+  <div class="section">
+    <label>Email</label>
+    <input id="emailDisplay" type="email" disabled>
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="section">
+    <label>Change password</label>
+    <input id="passwordInput" type="password" placeholder="New password (min 6 chars)">
+    <button id="savePass" class="btn">Change password</button>
+  </div>
+
+  <div id="statusNote">Saved</div>
+
+  <!-- LOGOUT -->
+  <button id="logoutBtn" class="btn logout-btn">Logout</button>
+
+</div>
+
+<!------------------- FIREBASE -------------------->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  updateProfile,
+  updatePassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+/* Firebase config */
+const firebaseConfig = {
+  apiKey: "AIzaSyB-dvNv0l6kHu48Vi0GVrT6p5SbuZXvjV0",
+  authDomain: "desak-e658f.firebaseapp.com",
+  projectId: "desak-e658f",
+  storageBucket: "desak-e658f.firebasestorage.app",
+  messagingSenderId: "245836805162",
+  appId: "1:245836805162:web:244353a8d42799176d7f53",
+  measurementId: "G-DFW0HM8ZDW"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+/* Elements */
+const nameInput = document.getElementById("nameInput");
+const emailDisplay = document.getElementById("emailDisplay");
+const passwordInput = document.getElementById("passwordInput");
+const saveNameBtn = document.getElementById("saveName");
+const savePassBtn = document.getElementById("savePass");
+const logoutBtn = document.getElementById("logoutBtn");
+const statusNote = document.getElementById("statusNote");
+
+let currentUser = null;
+
+/* Reload user info */
+function showSaved(msg="Saved") {
+  statusNote.textContent = msg;
+  statusNote.style.opacity = "1";
+  setTimeout(()=> statusNote.style.opacity = "0", 1800);
+}
+
+/* Auth State */
+onAuthStateChanged(auth, (user) => {
+  if (!user) { 
+    window.location.href = "login.html";
+    return;
+  }
+
+  currentUser = user;
+  nameInput.value = user.displayName || "";
+  emailDisplay.value = user.email || "";
+});
+
+/* Save name */
+saveNameBtn.addEventListener("click", async () => {
+  const name = nameInput.value.trim();
+  if (name.length < 2) return alert("Please enter a valid name.");
+
+  await updateProfile(currentUser, { displayName: name });
+  showSaved("Name updated");
+});
+
+/* Save password */
+savePassBtn.addEventListener("click", async () => {
+  const pass = passwordInput.value.trim();
+  if (pass.length < 6) return alert("Password must be at least 6 characters.");
+
+  try {
+    await updatePassword(currentUser, pass);
+    passwordInput.value = "";
+    showSaved("Password updated");
+  } catch (err) {
+    alert(err.message + (err.code === 'auth/requires-recent-login' ? "\nPlease login again." : ""));
+  }
+});
+
+/* Logout */
+logoutBtn.addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "index.html";
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+/* ======================================================
+   DESAK — Premium Clothing Brand
+   Clean | Elegant | Modern | Responsive
+   ====================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --black: #111;
+  --white: #fff;
+  --gray: #555;
+  --light-gray: #f5f5f5;
+  --accent: #000; /* pure black accent */
+  --transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* ========================= Global ========================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+/* ========================= Top Bar ========================= */
+.top-bar {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 6px 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+/* ========================= Header ========================= */
+.site-header {
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid #eee;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: var(--black);
+  letter-spacing: 1.5px;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-list a {
+  color: var(--black);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: var(--transition);
+}
+/* ========== Navbar Icons ========== */
+.nav-list #account-link,
+.nav-list .cart-icon {
+  font-size: 1.3rem;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.nav-list #account-link:hover,
+.nav-list .cart-icon:hover {
+  color: #555;
+}
+
+.nav-list a:hover {
+  color: var(--accent);
+}
+
+.nav-list a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after {
+  width: 100%;
+}
+
+/* ========================= Hero Section ========================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: url("https://png.pngtree.com/background/20250122/original/pngtree-fashion-clothing-on-hangers-at-the-show-picture-image_15460073.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 1.8s ease forwards;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  letter-spacing: 4px;
+}
+
+.subtext {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================= Spacer ========================= */
+.black-space {
+  background-color: #000;
+  height: 3rem;
+  width: 100%;
+}
+
+/* ========================= Products ========================= */
+.products,
+.products1 {
+  padding: 100px 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.products {
+  background-image: url('https://i.pinimg.com/1200x/1e/ff/8c/1eff8c991c148e03dd945ae343755819.jpg');
+}
+
+.products1 {
+  background-image: url('https://i.pinimg.com/1200x/77/a3/72/77a372265aebcee19391ecd5b6449104.jpg');
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.section-header.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header h2 {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.section-header p {
+  color: var(--gray);
+  font-size: 1rem;
+}
+
+/* ========================= Carousel ========================= */
+.product-carousel {
+  display: flex;
+  gap: 40px;
+  transition: var(--transition);
+  position: relative;
+  will-change: transform;
+}
+
+.product {
+  min-width: calc(33.333% - 26px);
+  background: var(--light-gray);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.product:hover {
+  transform: translateY(-6px);
+}
+
+.product-img {
+  width: 100%;
+  height: 320px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background-image: url('C:\Users\e15\Downloads\h1.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+
+.product h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.product p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.add-to-cart-btn {
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-to-cart-btn:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+
+/* ========================= Cart Toast ========================= */
+#cart-toast {
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  padding: 14px 26px;
+  border-radius: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: all 0.5s ease;
+  z-index: 9999;
+}
+
+#cart-toast.show {
+  bottom: 20px;
+}
+
+/* ========================= Footer ========================= */
+.site-footer {
+  background: #000;
+  color: var(--white);
+  text-align: center;
+  padding: 50px 0;
+  font-size: 0.95rem;
+}
+
+#tbl {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+#tbl td {
+  width: 33.33%;
+  vertical-align: top;
+  word-wrap: break-word;
+  padding: 0 15px;
+}
+
+#tbl a {
+  color: var(--white);
+  text-decoration: none;
+  position: relative;
+  transition: var(--transition);
+}
+
+#tbl a:hover::after {
+  width: 100%;
+}
+
+#tbl a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--white);
+  transition: width 0.3s ease;
+}
+
+/* ========================= Responsive ========================= */
+@media (max-width: 900px) {
+  .nav-list { gap: 24px; }
+  .hero h1 { font-size: 2.8rem; }
+  .product { min-width: 100%; }
+}
+/* Dark page header contrast fix */
+body[style*="background: #111"] .nav-list #account-link,
+body[style*="background: #111"] .nav-list .cart-icon {
+  color: #fff;
+}
+/* ========== Login Modal ========== */
+/* ========== Login/Signup Modal ========== */
+
+
+.login-content {
+  background: #fff;
+  color: #000;
+  padding: 40px 30px;
+  border-radius: 16px;
+  width: 340px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  position: relative;
+  animation: fadeInModal 0.3s ease;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.tab-header button {
+  background: transparent;
+  border: 1px solid #000;
+  color: #000;
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-header button.active-tab {
+  background: #000;
+  color: #fff;
+}
+
+.tab-header button:hover {
+  background: #333;
+  color: #fff;
+}
+
+.tab-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+.login-content input {
+  padding: 10px 12px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.login-content button {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-content button:hover {
+  background: #333;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #444;
+  margin-top: 8px;
+}
+
+.note a {
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+@keyframes fadeInModal {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+/* ===== Profile Image in Navbar ===== */
+.profile-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 6px;
+  border: 1px solid #000;
+  vertical-align: middle;
+}
+/* modal basic */
+.login-content { background:#fff; color:#000; padding:30px; border-radius:14px; width:340px; position:relative; }
+.hidden { display:none; }
+.active-tab { background:#000; color:#fff; }
+
+#account-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  color: #000;
+}
+
+body[style*="background: #111"] #account-link {
+  color: #fff;
+}
+
+body[style*="background: #111"] .profile-img {
+  border-color: #fff;
+}
