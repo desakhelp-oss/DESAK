@@ -20,7 +20,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#" class="logo">DESAK</a>
-      <nav>
+      <nav class="topbar">
         <ul class="nav-list">
           <li><a href="index.html">Home</a></li>
           <li><a href="#hoodies">Hoodies</a></li>
@@ -35,11 +35,22 @@
           </li>
 
 
-          <li><a href="cart.html" id="cart-link" class="cart-icon">🛒</a></li>
+          <div class="nav-actions">
+    <a href="/cart" class="cart-btn" aria-label="Cart">🛒</a>
+    <button class="search-toggle" aria-label="Search">🔍</button>
+  </div>
         </ul>
 
       </nav>
     </div>
+    <div id="nav-search" class="nav-search" aria-hidden="true">
+  <form id="site-search-form" action="/search" method="get">
+    <input name="q" id="site-search-input" placeholder="Search products, categories..." />
+    <button type="submit">Search</button>
+    <button type="button" id="search-close">✕</button>
+  </form>
+</div>
+
   </header>
 
   <!-- ====== Hero Section ====== -->
@@ -61,7 +72,39 @@
         <h2>Hoodies Collection</h2>
         <p>Discover cozy elegance and timeless comfort.</p>
       </div>
+      <section class="product-carousel-wrap">
+  <!-- Left arrow button (circle) -->
+  <button id="carousel-reset" class="carousel-reset" title="Go to start" aria-hidden="true">
+    ◀
+  </button>
 
+  <div id="product-carousel" class="product-carousel" role="list">
+    <!-- Example product card (repeat for each product) -->
+    <!-- Replace href with product page URL at your Shopify store -->
+    <article class="product-card" data-variant-id="1234567890">
+      <a class="product-link" href="https://desak.shop/products/unisex-hoodie" target="_self">
+        <div class="product-media">
+          <img src="https://cdn.shopify.com/s/files/1/xxxxx/products/hoodie.jpg" alt="Unisex Hoodie">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Unisex Hoodie</h3>
+          <div class="product-price">Rs. 250.00</div>
+        </div>
+      </a>
+      <button class="add-to-site-cart">Add to site cart</button>
+    </article>
+
+    <!-- Add more .product-card entries here -->
+  </div>
+
+  <!-- Optional right helper to prevent blank space on small screens (keeps layout tidy) -->
+  <div class="carousel-end-buffer" aria-hidden="true"></div>
+</section>
+
+<!-- Proceed to Checkout button (site-level cart) -->
+<div class="site-cart-actions">
+  <button id="go-to-shopify-checkout">Proceed to checkout</button>
+</div>
       <div class="product-carousel shirts-carousel">
         <div class="product">
           <div class="product-img" style="background-image:url('https://via.placeholder.com/400x400?text=Hoodie+1');">
@@ -336,5 +379,6 @@
 
 
 </html>
+
 
 
