@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 // CONFIG: your shop domain (no trailing slash)
-const SHOP_DOMAIN = 'https://desak.shop';
+const SHOP_DOMAIN = 'https://desak-9776.myshopify.com/';
 
 // Utility: scroll carousel to start
 const carousel = document.getElementById('product-carousel');
@@ -313,4 +313,5 @@ searchClose && searchClose.addEventListener('click', ()=>{
 
 
 });
+
 
