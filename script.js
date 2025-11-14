@@ -212,6 +212,100 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
     });
+// CONFIG: your shop domain (no trailing slash)
+const SHOP_DOMAIN = 'https://desak.shop';
+
+// Utility: scroll carousel to start
+const carousel = document.getElementById('product-carousel');
+const resetBtn = document.getElementById('carousel-reset');
+
+function updateResetVisibility(){
+  if (!carousel) return;
+  // show reset if scrolled right, hide if at start
+  if (carousel.scrollLeft > 20){
+    resetBtn.classList.add('visible');
+    resetBtn.classList.add('highlight'); // highlighted border when actionable
+  } else {
+    resetBtn.classList.remove('visible');
+    resetBtn.classList.remove('highlight');
+  }
+  // stop blank space: if near end, apply padding/buffer via CSS. (We also optionally lock right scroll)
+  // Prevent overscroll by limiting scrollLeft
+}
+
+carousel && carousel.addEventListener('scroll', () => {
+  // throttle not required for small stores
+  updateResetVisibility();
+});
+
+// Reset button behaviour: scroll to start smoothly
+resetBtn && resetBtn.addEventListener('click', () => {
+  carousel.scrollTo({ left: 0, behavior: 'smooth' });
+  // highlight briefly
+  resetBtn.classList.add('highlight');
+  setTimeout(()=> resetBtn.classList.remove('highlight'), 400);
+});
+
+// Make sure carousel stops at last card (no blank space)
+// We'll compute maxScroll and, when user scrolls beyond maxScroll, clamp it back.
+function clampScrollAtEnd(){
+  const max = carousel.scrollWidth - carousel.clientWidth;
+  if (carousel.scrollLeft > max) {
+    carousel.scrollTo({ left: max, behavior: 'smooth' });
+  }
+}
+carousel && carousel.addEventListener('scroll', () => {
+  // small timeout to check after scrolling ends
+  clearTimeout(carousel._clampTO);
+  carousel._clampTO = setTimeout(clampScrollAtEnd, 120);
+});
+
+// Add-to-site-cart: maintain a small JS cart (array of variantId:qty)
+const siteCart = {}; // variantId -> qty
+
+document.querySelectorAll('.add-to-site-cart').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    const card = e.target.closest('.product-card');
+    const variantId = card && card.getAttribute('data-variant-id');
+    if (!variantId) { alert('Variant ID missing'); return; }
+    siteCart[variantId] = (siteCart[variantId]||0) + 1;
+    btn.textContent = 'Added ✓';
+    setTimeout(()=> btn.textContent = 'Add to site cart', 900);
+  });
+});
+
+// Proceed to checkout: build shopify cart permalink and redirect to cart (then checkout)
+document.getElementById('go-to-shopify-checkout').addEventListener('click', ()=>{
+  // Build permalink: /cart/VARID:qty,VARID2:qty
+  const entries = Object.entries(siteCart);
+  if (!entries.length) {
+    // If no items in site cart, redirect user to Shopify cart page (or show message)
+    window.location.href = SHOP_DOMAIN + '/cart';
+    return;
+  }
+  const parts = entries.map(([vid,qty]) => `${vid}:${qty}`);
+  const cartUrl = `${SHOP_DOMAIN}/cart/${parts.join(',')}`;
+  // Redirect to Shopify cart (user sees cart with all items). They can click Checkout.
+  window.location.href = cartUrl;
+});
+
+// PRODUCT CARD LINK BEHAVIOUR:
+// Cards already use an <a href="https://desak.shop/products/handle"> so clicking goes to Shopify product page.
+// If you want product title or image click to open in same tab, ensure target="_self" (already set).
+
+// NAVBAR SEARCH TOGGLE
+const searchToggle = document.querySelector('.search-toggle');
+const navSearch = document.getElementById('nav-search');
+const searchClose = document.getElementById('search-close');
+searchToggle && searchToggle.addEventListener('click', ()=>{
+  navSearch.style.display = 'flex';
+  navSearch.setAttribute('aria-hidden','false');
+  document.getElementById('site-search-input').focus();
+});
+searchClose && searchClose.addEventListener('click', ()=>{
+  navSearch.style.display = 'none';
+  navSearch.setAttribute('aria-hidden','true');
+});
 
 
  
@@ -219,3 +313,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
