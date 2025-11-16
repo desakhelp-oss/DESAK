@@ -1,252 +1,362 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DESAK | Login</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — DESAK</title>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: #111;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
+  <!-- Minimal in-file styles: Apple-like glass / black theme -->
+  <style>
+    :root{
+      --bg: #060606;
+      --card: rgba(255,255,255,0.03);
+      --muted: #bdbdbd;
+      --accent: #ffffff;
+      --glass-border: rgba(255,255,255,0.04);
+      --radius: 14px;
+      --shadow: 0 12px 40px rgba(0,0,0,0.7);
+      --btn-radius: 10px;
+      --gap: 12px;
+    }
+    html,body{height:100%;margin:0;font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg);color:var(--accent);-webkit-font-smoothing:antialiased}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:28px}
+    .card{
+      width:100%;
+      max-width:420px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      border:1px solid var(--glass-border);
+      box-shadow:var(--shadow);
+      padding:28px;
+      backdrop-filter: blur(8px) saturate(120%);
+      -webkit-backdrop-filter: blur(8px) saturate(120%);
     }
 
-    .login-container {
-        background: #fff;
-        color: #000;
-        width: 95%;
-        max-width: 420px;
-        padding: 40px;
-        border-radius: 18px;
-        box-shadow: 0 0 30px rgba(0,0,0,0.4);
-        animation: fadeIn 0.4s ease;
+    .brand {
+      display:flex;align-items:center;gap:12px;margin-bottom:6px;
     }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to   { opacity: 1; transform: translateY(0); }
+    .brand .logo {
+      font-weight:800;font-size:20px;letter-spacing:1px;
     }
+    .brand .tag { color:var(--muted); font-size:13px; margin-top:2px; }
 
-    .title {
-        font-size: 2rem;
-        font-weight: 700;
-        text-align: center;
-        margin-bottom: 25px;
-        letter-spacing: 1px;
+    h1{margin:0;font-size:22px;font-weight:700}
+    .subtitle{color:var(--muted);font-size:13px;margin-top:6px;margin-bottom:16px}
+
+    .btn{
+      width:100%;padding:12px;border-radius:var(--btn-radius);border:none;font-weight:700;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:15px;
     }
+    .btn-google{background:#1f5fe1;color:white;border:1px solid rgba(0,0,0,0.2)}
+    .btn-phone{background:#ffffff;color:#000;border:1px solid rgba(0,0,0,0.06)}
+    .divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--muted);font-size:13px}
+    .divider::before,.divider::after{content:"";height:1px;background:rgba(255,255,255,0.02);flex:1;border-radius:2px}
 
-    input {
-        width: 100%;
-        padding: 12px;
-        margin: 8px 0;
-        border-radius: 8px;
-        border: 1px solid #000;
-        background: #f7f7f7;
-        font-size: 1rem;
+    form{display:flex;flex-direction:column;gap:10px}
+    label{font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type="email"],input[type="password"],input[type="tel"]{
+      width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
+      background:transparent;color:var(--accent);font-size:14px;
     }
+    .row{display:flex;gap:10px}
+    .small{font-size:13px;color:var(--muted)}
 
-    button {
-        width: 100%;
-        padding: 12px;
-        border: none;
-        border-radius: 8px;
-        background: #000;
-        color: #fff;
-        font-size: 1rem;
-        margin-top: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    button:hover { background: #333; }
+    .actions{display:flex;gap:10px;margin-top:6px}
+    .link-like{background:transparent;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;padding:0;font-size:13px}
 
-    .divider {
-        text-align: center;
-        margin: 20px 0;
-        font-size: 0.9rem;
-        color: #555;
-    }
+    .otp-row{display:flex;gap:8px;justify-content:space-between}
+    .otp-input{width:46px;height:46px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--accent);font-size:20px;text-align:center}
 
-    .social-btn {
-        width: 100%;
-        padding: 14px;
-        border-radius: 8px;
-        border: 1px solid #000;
-        margin-top: 10px;
-        background: #fff;
-        color: #000;
-        cursor: pointer;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        transition: 0.3s;
-    }
-    .social-btn:hover {
-        background: #f0f0f0;
-    }
+    .msg{font-size:13px;color:var(--muted);min-height:18px}
+    .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:rgba(255,255,255,0.04);padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:var(--accent);box-shadow:0 12px 40px rgba(0,0,0,0.6);display:none}
+    .toast.show{display:block}
 
-    .otp-section {
-        display: none;
-        margin-top: 15px;
-    }
+    .footer-small{margin-top:12px;color:var(--muted);font-size:13px;text-align:center}
+    a.small-link{color:var(--muted);text-decoration:none}
+    a.small-link:hover{color:var(--accent)}
 
-    .note {
-        font-size: 0.8rem;
-        text-align: center;
-        margin-top: 10px;
-        color: #444;
-    }
+    /* responsive tweaks */
+    @media (max-width:420px){ .card{padding:18px} .otp-input{width:40px;height:40px;font-size:18px} }
+  </style>
 
-    a { color: #000; }
-</style>
-</head>
-<body>
-
-<div class="login-container">
-    <div class="title">Login to DESAK</div>
-
-    <!-- EMAIL LOGIN -->
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
-    <button id="emailLoginBtn">Login</button>
-
-    <div class="divider">or continue with</div>
-
-    <!-- GOOGLE -->
-    <button class="social-btn" id="googleBtn">🔘 Continue with Google</button>
-
-    <!-- APPLE -->
-    <button class="social-btn" id="appleBtn"> Sign in with Apple</button>
-
-    <!-- PHONE -->
-    <button class="social-btn" id="phoneBtn">📱 Sign in with Phone</button>
-
-    <div class="otp-section" id="otpBox">
-        <input id="phoneInput" type="text" placeholder="Enter phone (+91...)">
-        <button id="sendOtp">Send OTP</button>
-
-        <input id="otpInput" type="text" placeholder="Enter OTP">
-        <button id="verifyOtp">Verify OTP</button>
-
-        <div id="recaptcha-container"></div>
-    </div>
-
-    <div class="note">
-        Need an account? Sign up on the homepage popup.
-    </div>
-
-</div>
-
-
-<!-- FIREBASE MODULE -->
-<script type="module">
+  <!-- Firebase modular SDK (v11+) -->
+  <script type="module">
+    // Firebase imports (modular)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import {
-        getAuth,
-        GoogleAuthProvider,
-        OAuthProvider,
-        signInWithPopup,
-        RecaptchaVerifier,
-        signInWithPhoneNumber,
-        signInWithEmailAndPassword
-    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithPhoneNumber, RecaptchaVerifier, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
+    // Your Firebase config (confirmed)
     const firebaseConfig = {
-        apiKey: "AIzaSyB-dvNv0l6kHu48Vi0GVrT6p5SbuZXvjV0",
-        authDomain: "desak-e658f.firebaseapp.com",
-        projectId: "desak-e658f",
-        storageBucket: "desak-e658f.firebasestorage.app",
-        messagingSenderId: "245836805162",
-        appId: "1:245836805162:web:244353a8d42799176d7f53",
-        measurementId: "G-DFW0HM8ZDW"
+      apiKey: "AIzaSyB-dvNv0l6kHu48Vi0GVrT6p5SbuZXvjV0",
+      authDomain: "desak-e658f.firebaseapp.com",
+      projectId: "desak-e658f",
+      storageBucket: "desak-e658f.firebasestorage.app",
+      messagingSenderId: "245836805162",
+      appId: "1:245836805162:web:244353a8d42799176d7f53",
+      measurementId: "G-DFW0HM8ZDW"
     };
 
+    // Initialize Firebase + Auth
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // -------------- EMAIL LOGIN ----------------
-    document.getElementById("emailLoginBtn").onclick = async () => {
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
+    // DOM helper
+    const $ = (sel) => document.querySelector(sel);
+    const showToast = (m) => {
+      const t = $("#toast");
+      t.innerText = m;
+      t.classList.add("show");
+      setTimeout(()=>t.classList.remove("show"), 2800);
+    };
+
+    // Redirect after successful login
+    function redirectAfterLogin() {
+      // go to account page as requested
+      window.location.href = "account.html";
+    }
+
+    // If user already logged in, go to account.html
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // small delay to allow page render
+        setTimeout(()=>redirectAfterLogin(), 250);
+      }
+    });
+
+    /* ------------------------
+       GOOGLE SIGN-IN
+       ------------------------ */
+    const googleBtn = null;
+    // wire up later after DOM ready
+
+    /* ------------------------
+       EMAIL / PASSWORD SIGN-IN & SIGN-UP
+       ------------------------ */
+
+    // We'll attach event listeners after DOM ready
+
+    /* ------------------------
+       PHONE OTP (visible reCAPTCHA)
+       ------------------------ */
+    let recaptchaVerifier = null;
+    let phoneConfirmationResult = null;
+
+    // After DOM ready: attach listeners + render recaptcha
+    window.addEventListener("DOMContentLoaded", () => {
+      // Elements
+      const googleLoginBtn = $("#btnGoogle");
+      const phoneStartBtn = $("#btnPhoneStart");
+      const phoneVerifyBtn = $("#btnPhoneVerify");
+      const phoneInput = $("#phone");
+      const otpInputs = Array.from(document.querySelectorAll(".otp-input"));
+      const emailInput = $("#email");
+      const passInput = $("#password");
+      const signInBtn = $("#btnSignIn");
+      const signUpBtn = $("#btnSignUp");
+      const toggleToSignUp = $("#toSignUp");
+      const toggleToSignIn = $("#toSignIn");
+      const emailFormWrap = $("#emailWrap");
+      const phoneFormWrap = $("#phoneWrap");
+      const otpWrap = $("#otpWrap");
+      const recaptchaContainer = $("#recaptcha");
+
+      // Render visible reCAPTCHA
+      recaptchaVerifier = new RecaptchaVerifier(recaptchaContainer, {
+        size: 'normal',
+        theme: 'dark'
+      }, auth);
+      recaptchaVerifier.render().catch(err => {
+        console.error("reCAPTCHA render error:", err);
+      });
+
+      // Google login
+      googleLoginBtn.addEventListener("click", async (ev) => {
+        ev.preventDefault();
+        const provider = new GoogleAuthProvider();
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-            alert("Logged in successfully!");
-            window.location.href = "index.html";
+          await signInWithPopup(auth, provider);
+          showToast("Logged in with Google");
+          redirectAfterLogin();
         } catch (err) {
-            alert(err.message);
+          console.error("Google sign-in error:", err);
+          showToast(err.message || "Google sign-in failed");
         }
-    };
+      });
 
-    // -------------- GOOGLE LOGIN ----------------
-    const googleProvider = new GoogleAuthProvider();
-    document.getElementById("googleBtn").onclick = async () => {
+      // Email sign-in
+      signInBtn.addEventListener("click", async (ev) => {
+        ev.preventDefault();
+        const email = (emailInput.value || "").trim();
+        const pass = (passInput.value || "").trim();
+        if (!email || !pass) { showToast("Enter email & password"); return; }
         try {
-            await signInWithPopup(auth, googleProvider);
-            alert("Google login successful!");
-            window.location.href = "index.html";
+          await signInWithEmailAndPassword(auth, email, pass);
+          showToast("Signed in");
+          redirectAfterLogin();
         } catch (err) {
-            alert(err.message);
+          console.error("Email sign-in error:", err);
+          showToast(err.message || "Sign in failed");
         }
-    };
+      });
 
-    // -------------- APPLE LOGIN ----------------
-    const appleProvider = new OAuthProvider("apple.com");
-    document.getElementById("appleBtn").onclick = async () => {
+      // Email sign-up
+      signUpBtn.addEventListener("click", async (ev) => {
+        ev.preventDefault();
+        const email = (emailInput.value || "").trim();
+        const pass = (passInput.value || "").trim();
+        if (!email || !pass) { showToast("Enter email & password"); return; }
         try {
-            await signInWithPopup(auth, appleProvider);
-            alert("Apple login successful!");
-            window.location.href = "index.html";
+          await createUserWithEmailAndPassword(auth, email, pass);
+          showToast("Account created");
+          redirectAfterLogin();
         } catch (err) {
-            alert(err.message);
+          console.error("Email signup error:", err);
+          showToast(err.message || "Sign up failed");
         }
-    };
+      });
 
-    // -------------- PHONE LOGIN ----------------
-    const phoneBtn = document.getElementById("phoneBtn");
-    const otpBox = document.getElementById("otpBox");
+      // Phone start (send SMS)
+      phoneStartBtn.addEventListener("click", async (ev) => {
+        ev.preventDefault();
+        const phone = (phoneInput.value || "").trim();
+        if (!phone) { showToast("Enter phone with country code (e.g. +91xxxxxxxxxx)"); return; }
+        try {
+          phoneConfirmationResult = await signInWithPhoneNumber(auth, phone, recaptchaVerifier);
+          showToast("OTP sent");
+          // show OTP UI
+          otpWrap.style.display = "flex";
+          phoneFormWrap.style.display = "none";
+          otpInputs[0].focus();
+        } catch (err) {
+          console.error("Phone start error:", err);
+          showToast(err.message || "Failed to send OTP");
+          try { recaptchaVerifier.render().then(widgetId => { grecaptcha.reset(widgetId); }); } catch(e){}
+        }
+      });
 
-    phoneBtn.onclick = () => {
-        otpBox.style.display = "block";
-        renderRecaptcha();
-    };
-
-    const renderRecaptcha = () => {
-        window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
-            size: "normal"
+      // Auto focus otp digits & paste support
+      otpInputs.forEach((inp, idx) => {
+        inp.addEventListener("input", (e) => {
+          const val = inp.value.replace(/\D/g, "").slice(0,1);
+          inp.value = val;
+          if (val && idx < otpInputs.length - 1) otpInputs[idx+1].focus();
         });
-    };
+        inp.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && !inp.value && idx > 0) otpInputs[idx-1].focus();
+        });
+        inp.addEventListener("paste", (e) => {
+          e.preventDefault();
+          const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,"").slice(0,6);
+          for (let i=0;i<6;i++) otpInputs[i].value = paste[i] || "";
+        });
+      });
 
-    let confirmationResult;
-
-    document.getElementById("sendOtp").onclick = async () => {
-        const number = document.getElementById("phoneInput").value.trim();
+      // Verify OTP
+      phoneVerifyBtn.addEventListener("click", async (ev) => {
+        ev.preventDefault();
+        const code = otpInputs.map(i => i.value.trim()).join("");
+        if (!code || code.length < 4) { showToast("Enter the OTP"); return; }
+        if (!phoneConfirmationResult) { showToast("No OTP request found"); return; }
         try {
-            confirmationResult = await signInWithPhoneNumber(auth, number, window.recaptchaVerifier);
-            alert("OTP sent!");
+          await phoneConfirmationResult.confirm(code);
+          showToast("Phone verified");
+          redirectAfterLogin();
         } catch (err) {
-            alert(err.message);
+          console.error("OTP confirm error:", err);
+          showToast(err.message || "OTP verification failed");
         }
-    };
+      });
 
-    document.getElementById("verifyOtp").onclick = async () => {
-        const otp = document.getElementById("otpInput").value.trim();
-        try {
-            await confirmationResult.confirm(otp);
-            alert("Phone login successful!");
-            window.location.href = "index.html";
-        } catch (err) {
-            alert(err.message);
-        }
-    };
-</script>
+      // Toggle email / phone UI
+      $("#showEmail").addEventListener("click", (e)=>{ e.preventDefault(); emailFormWrap.style.display="block"; phoneFormWrap.style.display="none"; otpWrap.style.display="none"; });
+      $("#showPhone").addEventListener("click", (e)=>{ e.preventDefault(); emailFormWrap.style.display="none"; phoneFormWrap.style.display="block"; otpWrap.style.display="none"; });
 
+    }); // DOMContentLoaded end
+
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="loginTitle">
+      <div class="brand">
+        <div class="logo">DESAK</div>
+        <div class="tag small">Premium Clothing</div>
+      </div>
+
+      <h1 id="loginTitle">Welcome back</h1>
+      <div class="subtitle">Sign in to continue to your account</div>
+
+      <!-- Social / quick actions -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button id="btnGoogle" class="btn btn-google" aria-label="Continue with Google">
+          <svg width="18" height="18" viewBox="0 0 533.5 544.3" style="vertical-align:middle"><path fill="#4285f4" d="M533.5 278.4..."></path></svg>
+          Continue with Google
+        </button>
+
+        <button id="btnPhoneStart" class="btn btn-phone" aria-label="Continue with phone" onclick="/* noop for progressive enhancement */">
+          Continue with Phone
+        </button>
+      </div>
+
+      <div class="divider">or continue with</div>
+
+      <!-- Email form -->
+      <div id="emailWrap">
+        <form onsubmit="return false;">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="name@domain.com" autocomplete="email" />
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter password" autocomplete="current-password" />
+          <div class="actions">
+            <button id="btnSignIn" class="btn" style="background:#ffffff;color:#000">Sign in</button>
+            <button id="btnSignUp" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--accent)">Create</button>
+          </div>
+        </form>
+      </div>
+
+      <div style="margin-top:10px" class="small">
+        <button id="showPhone" class="link-like">Sign in with phone</button>
+        <span style="float:right"><button id="showEmail" class="link-like">Sign in with email</button></span>
+      </div>
+
+      <!-- Phone form -->
+      <div id="phoneWrap" style="display:none;margin-top:12px">
+        <label for="phone">Phone (with country code)</label>
+        <input id="phone" type="tel" placeholder="+91xxxxxxxxxx" autocomplete="tel" />
+        <div id="recaptcha" style="margin-top:10px"></div>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <button id="btnPhoneStart" class="btn btn-phone">Send OTP</button>
+        </div>
+      </div>
+
+      <!-- OTP UI (hidden until SMS sent) -->
+      <div id="otpWrap" style="display:none;margin-top:12px;flex-direction:column;gap:8px">
+        <label>Enter OTP</label>
+        <div class="otp-row" style="margin-bottom:8px">
+          <input class="otp-input" inputmode="numeric" maxlength="1" />
+          <input class="otp-input" inputmode="numeric" maxlength="1" />
+          <input class="otp-input" inputmode="numeric" maxlength="1" />
+          <input class="otp-input" inputmode="numeric" maxlength="1" />
+          <input class="otp-input" inputmode="numeric" maxlength="1" />
+          <input class="otp-input" inputmode="numeric" maxlength="1" />
+        </div>
+        <div style="display:flex;gap:8px">
+          <button id="btnPhoneVerify" class="btn" style="background:#fff;color:#000">Verify OTP</button>
+          <button id="btnPhoneResend" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.04)">Resend</button>
+        </div>
+      </div>
+
+      <div class="msg" id="statusMsg" aria-live="polite"></div>
+
+      <div class="footer-small">
+        <small>Don't have an account? Create one with email above. By signing in you agree to our <a class="small-link" href="#">Terms</a>.</small>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- no extra scripts needed; all authentication logic is inside the module above -->
 </body>
 </html>
