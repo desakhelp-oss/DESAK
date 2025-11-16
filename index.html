@@ -4,14 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DESAK | Premium-Clothing</title>
+  <title>DESAK — Premium Clothing</title>
+  <meta name="description" content="DESAK — premium hoodies, sweatshirts & scarves built with timeless elegance." />
+  <link rel="logo" href="D.png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" href="C:\Users\e15\Downloads\Picsart_25-11-11_20-39-16-435-removebg-preview.png">
 </head>
 
 <body>
-
-  <!-- ====== Top Offer Bar ====== -->
+  <!-- TOP BAR -->
   <div class="top-bar">
     <p>Exclusive Offer ✨ — Flat 20% Off on First Purchase</p>
   </div>
@@ -20,366 +24,169 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#" class="logo">DESAK</a>
-      <nav class="topbar">
+      <nav class="main-nav">
         <ul class="nav-list">
           <li><a href="index.html">Home</a></li>
           <li><a href="#hoodies">Hoodies</a></li>
           <li><a href="#sweatshirts">Sweatshirts</a></li>
           <li><a href="#scarves">Scarves</a></li>
           <li>
-            <a href="login.html" id="account-link">
-              <img id="profile-pic" src="https://www.silcharmunicipality.in/wp-content/uploads/2021/02/male-face.jpg"
-                alt="Profile" class="profile-img">
-              <span id="username"></span>
-            </a>
+            <div class="nav-actions">
+              <button id="search-toggle" class="nav-icon"><img
+                  src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-5.png" height="23"
+                  width="20"></button>
+              <button id="wishlist-toggle" class="nav-icon"><img
+                  src="Untitled design (1).png" height="23"
+                  width="20"></button>
+              <div class="cart-container"><button id="cart-toggle" class="nav-actions"><img class="cart-icon"
+                    src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png" height="23" width="20">
+                  <span id="cart-count" class="cart-count">0</span></button></div>
+              <button class="nav-icon" onclick="window.location.href='C:/Users/e15/Desak/login.html'"><img
+                  src="https://i.pinimg.com/564x/57/00/c0/5700c04197ee9a4372a35ef16eb78f4e.jpg" height="23"
+                  width="20"></button>
+            </div>
           </li>
-
-
-          <div class="nav-actions">
-    <a href="/cart" class="cart-btn" aria-label="Cart">🛒</a>
-    <button class="search-toggle" aria-label="Search">🔍</button>
-  </div>
         </ul>
-
       </nav>
     </div>
-    <div id="nav-search" class="nav-search" aria-hidden="true">
-  <form id="site-search-form" action="/search" method="get">
-    <input name="q" id="site-search-input" placeholder="Search products, categories..." />
-    <button type="submit">Search</button>
-    <button type="button" id="search-close">✕</button>
-  </form>
-</div>
-
   </header>
 
-  <!-- ====== Hero Section ====== -->
-  <section class="hero" id="home">
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1>DESAK</h1>
-      <p class="subtext">by Sakshi Dhull</p>
+
+  <!-- SEARCH OVERLAY -->
+  <div id="searchOverlay" class="search-overlay">
+    <div class="search-panel container">
+      <input id="searchInput" type="search" placeholder="Search products..." />
+      <select id="searchSort">
+        <option value="">Sort by</option>
+        <option value="price-asc">Price — Low to High</option>
+        <option value="price-desc">Price — High to Low</option>
+        <option value="title-asc">Name — A → Z</option>
+        <option value="title-desc">Name — Z → A</option>
+      </select>
+      <button id="searchClose" class="btn-close">✕</button>
+
+      <div id="searchResults" class="search-results"></div>
     </div>
-  </section>
-
-  <!-- Spacer -->
-  <div class="black-space"></div>
-
-  <!-- ====== Hoodies Section ====== -->
-  <section id="hoodies" class="products">
-    <div class="container">
-      <div class="section-header">
-        <h2>Hoodies Collection</h2>
-        <p>Discover cozy elegance and timeless comfort.</p>
-      </div>
-      <section class="product-carousel-wrap">
-  <!-- Left arrow button (circle) -->
-  <button id="carousel-reset" class="carousel-reset" title="Go to start" aria-hidden="true">
-    ◀
-  </button>
-
-  <div id="product-carousel" class="product-carousel" role="list">
-    <!-- Example product card (repeat for each product) -->
-    <!-- Replace href with product page URL at your Shopify store -->
-    <article class="product-card" data-variant-id="1234567890">
-      <a class="product-link" href="https://desak.shop/products/unisex-hoodie" target="_self">
-        <div class="product-media">
-          <img src="https://cdn.shopify.com/s/files/1/xxxxx/products/hoodie.jpg" alt="Unisex Hoodie">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">Unisex Hoodie</h3>
-          <div class="product-price">Rs. 250.00</div>
-        </div>
-      </a>
-      <button class="add-to-site-cart">Add to site cart</button>
-    </article>
-
-    <!-- Add more .product-card entries here -->
   </div>
 
-  <!-- Optional right helper to prevent blank space on small screens (keeps layout tidy) -->
-  <div class="carousel-end-buffer" aria-hidden="true"></div>
-</section>
-
-<!-- Proceed to Checkout button (site-level cart) -->
-<div class="site-cart-actions">
-  <button id="go-to-shopify-checkout">Proceed to checkout</button>
-</div>
-      <div class="product-carousel shirts-carousel">
-        <div class="product">
-          <div class="product-img" style="background-image:url('https://via.placeholder.com/400x400?text=Hoodie+1');">
-          </div>
-          <h3>Classic Grey Hoodie</h3>
-          <p>₹1999</p>
-          <button class="add-to-cart-btn" data-name="Classic Grey Hoodie" data-price="1999">Add to Caburt</button>
-        </div>
-        <div class="product">
-          <div class="product-img" style="background-image:url('https://via.placeholder.com/400x400?text=Hoodie+2');">
-          </div>
-          <h3>Beige Fleece Hoodie</h3>
-          <p>₹2499</p>
-          <button class="add-to-cart-btn" data-name="Beige Fleece Hoodie" data-price="2499">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-img" style="background-image:url('https://via.placeholder.com/400x400?text=Hoodie+3');">
-          </div>
-          <h3>Black Oversized Hoodie</h3>
-          <p>₹2199</p>
-          <button class="add-to-cart-btn" data-name="Black Oversized Hoodie" data-price="2199">Add to Cart</button>
-        </div>
-      </div>
+  <!-- HERO SECTION (from your original design) -->
+  <section id="home" class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1 style="color: white;"><p id="p">DESAK</p></h1>
+      <p class="subtext" id="p">By Sakshi Dhull</p>
     </div>
   </section>
 
-  <!-- Spacer -->
-  <div class="black-space"></div>
+  <!-- SPACE -->
 
-  <!-- ====== Sweatshirt Section ====== -->
-  <section id="sweatshirts" class="products1">
-    <div class="container">
-      <div class="section-header">
-        <h2>Sweatshirt Collection</h2>
-        <p>Soft layers made for your every mood.</p>
-      </div>
 
-      <div class="product-carousel shirts-carousel">
-        <div class="product">
-          <div class="product-img"
-            style="background-image:url('https://via.placeholder.com/400x400?text=Sweatshirt+1');"></div>
-          <h3>Blue Crew Sweatshirt</h3>
-          <p>₹1899</p>
-          <button class="add-to-cart-btn" data-name="Blue Crew Sweatshirt" data-price="1899">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-img"
-            style="background-image:url('https://via.placeholder.com/400x400?text=Sweatshirt+2');"></div>
-          <h3>Beige Cotton Sweatshirt</h3>
-          <p>₹2099</p>
-          <button class="add-to-cart-btn" data-name="Beige Cotton Sweatshirt" data-price="2099">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-img"
-            style="background-image:url('https://via.placeholder.com/400x400?text=Sweatshirt+3');"></div>
-          <h3>Charcoal Minimal Sweatshirt</h3>
-          <p>₹1999</p>
-          <button class="add-to-cart-btn" data-name="Charcoal Minimal Sweatshirt" data-price="1999">Add to Cart</button>
-        </div>
-      </div>
+  <!-- SECTION TEMPLATE -->
+  <section id="featured" class="section container">
+    <div class="section-header">
+      <h1>Featured</h1>
     </div>
+    <div id="featuredGrid" class="product-grid"></div>
   </section>
 
-  <!-- Spacer -->
-  <div class="black-space"></div>
+  <div class="space-40"></div>
 
-  <!-- ====== Scarf Section ====== -->
-  <section id="scarves" class="products">
-    <div class="container">
-      <div class="section-header">
-        <h2>Scarf Collection</h2>
-        <p>Refined comfort, tailored for every occasion.</p>
-      </div>
-
-      <div class="product-carousel">
-        <div class="product">
-          <div class="product-img" style="background-image:url('https://via.placeholder.com/400x400?text=Scarf+1');">
-          </div>
-          <h3>Classic Wool Scarf</h3>
-          <p>₹1499</p>
-          <button class="add-to-cart-btn" data-name="Classic Wool Scarf" data-price="1499">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-img" style="background-image:url('https://via.placeholder.com/400x400?text=Scarf+2');">
-          </div>
-          <h3>Beige Silk Scarf</h3>
-          <p>₹1699</p>
-          <button class="add-to-cart-btn" data-name="Beige Silk Scarf" data-price="1699">Add to Cart</button>
-        </div>
-        <div class="product">
-          <div class="product-img" style="background-image:url('https://via.placeholder.com/400x400?text=Scarf+3');">
-          </div>
-          <h3>Printed Cotton Scarf</h3>
-          <p>₹1599</p>
-          <button class="add-to-cart-btn" data-name="Printed Cotton Scarf" data-price="1599">Add to Cart</button>
-        </div>
-      </div>
+  <section id="hoodies" class="section container">
+    <div class="section-header">
+      <h2>Hoodies</h2>
+      <p class="muted">Cozy comfort, modern aesthetic</p>
     </div>
+    <div id="hoodiesGrid" class="product-grid"></div>
   </section>
 
-  <!-- ====== Footer ====== -->
+  <div class="space-40"></div>
+
+  <section id="sweatshirts" class="section container">
+    <div class="section-header">
+      <h2>Sweatshirts</h2>
+      <p class="muted">Soft everyday layers</p>
+    </div>
+    <div id="sweatshirtsGrid" class="product-grid"></div>
+  </section>
+
+  <div class="space-40"></div>
+
+  <section id="scarves" class="section container">
+    <div class="section-header">
+      <h2>Scarves</h2>
+      <p class="muted">Refined warmth, elegant textures</p>
+    </div>
+    <div id="scarvesGrid" class="product-grid"></div>
+  </section>
+
+  <div class="space-40"></div>
+
+  <!-- CART DRAWER -->
+  <aside id="cartDrawer" class="drawer">
+    <div class="drawer-head">
+      <h3>Your Cart</h3>
+      <button id="closeCart" class="drawer-close">✕</button>
+    </div>
+    <div id="cartItems" class="drawer-body"></div>
+    <div class="drawer-foot">
+      <div class="cart-total">Subtotal: ₹<span id="cartSubtotal">0</span></div>
+      <button id="checkoutNow" class="btn-primary">Proceed to Checkout</button>
+      <button id="clearCart" class="btn-secondary">Clear Cart</button>
+    </div>
+  </aside>
+
+  <!-- WISHLIST DRAWER -->
+  <aside id="wishlistDrawer" class="drawer">
+    <div class="drawer-head">
+      <h3>Wishlist</h3>
+      <button id="closeWishlist" class="drawer-close">✕</button>
+    </div>
+    <div id="wishlistItems" class="drawer-body"></div>
+  </aside>
+
+  <!-- TOAST -->
+  <div id="addedToast" class="toast">
+    <p id="toastMessage">Added to Cart</p>
+    <button id="toastViewCart">View Cart</button>
+    <button id="toastClose">Close</button>
+  </div>
+
+  <!-- FOOTER (your original footer) -->
   <footer class="site-footer">
-    <table id="tbl">
-      <tr>
-        <td>
-          <h1 style="font-family: var(--font-serif);">DESAK</h1>
-          <p><strong>DESAK</strong> was born out of a simple desire to bring back the timeless elegance that modern
-            fashion left behind.</p>
-          <a href="#"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVXaKZEhqH0AqhnR79r6We7azwHDN-bSIFZw&s"
-              height="32" width="32"></a>
-          <a href="#"><img src="C:\Users\e15\OneDrive\Pictures\Screenshots\yt.png" height="30" width="30"
-              style="margin-left: 8px;"></a>
-        </td>
-        <td>
-          <p style="font-size: 20pt;">Quick Links</p>
-          <ul style="list-style: none; text-align: left;">
-            <li><a href="#home" style="color:#fff;text-decoration:none;">Home</a></li>
-            <li><a href="#hoodies" style="color:#fff;text-decoration:none;">Hoodies</a></li>
-            <li><a href="#sweatshirts" style="color:#fff;text-decoration:none;">Sweatshirts</a></li>
-            <li><a href="#scarves" style="color:#fff;text-decoration:none;">Scarves</a></li>
-          </ul>
-        </td>
-        <td>
-          <p style="font-size: 20pt;">Support</p>
-          <ul style="list-style: none;text-align: left;">
-            <li style="color:#fff;">📞 9779153062</li>
-            <li style="color:#fff;">🚚 Track Order</li>
-            <li><a href="mailto:anshikadhull7@gmail.com" style="color:#fff;">👤 Your Account</a></li>
-          </ul>
-        </td>
-      </tr>
-    </table>
+    <div class="container footer-grid">
+      <div>
+        <h3>DESAK</h3>
+        <p><strong>DESAK</strong> was born out of a simple desire to bring back the timeless elegance that modern
+          fashion left behind.</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#hoodies">Hoodies</a></li>
+          <li><a href="#sweatshirts">Sweatshirts</a></li>
+          <li><a href="#scarves">Scarves</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Support</h4>
+        <ul class="footer-links">
+          <li>📞9779153062</li>
+          <li>🚚 Track Order</li>
+          <li><a href="mailto: desakhelp@gmail.com">💁‍♀️Customer Support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom centered">
+      <small>© <span id="year"></span> DESAK — All Rights Reserved.</small>
+    </div>
   </footer>
 
-  <!-- Cart confirmation toast -->
-  <div id="cart-toast"></div>
-  <!-- ===== Login / Signup Popup ===== -->
-  
-  <!-- Firebase SDKs -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import {
-      getAuth,
-      updateProfile
-    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-    import {
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      onAuthStateChanged,
-      signOut
-    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyB-dvNv0l6kHu48Vi0GVrT6p5SbuZXvjV0",
-      authDomain: "desak-e658f.firebaseapp.com",
-      projectId: "desak-e658f",
-      storageBucket: "desak-e658f.firebasestorage.app",
-      messagingSenderId: "245836805162",
-      appId: "1:245836805162:web:244353a8d42799176d7f53",
-      measurementId: "G-DFW0HM8ZDW"
-    };
-
-    // Initialize Firebase app + auth
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // Expose minimal functions to the global window for script.js to use
-    window.auth = auth;
-    window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
-    window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-    window.onAuthStateChanged = onAuthStateChanged;
-    window.updateProfile = updateProfile;
-    window.signOut = signOut;
-  </script>
-
-
-
-  <!-- Your main script -->
+  <script>document.getElementById("year").innerText = new Date().getFullYear();</script>
   <script src="script.js"></script>
-  <div id='product-component-1763129694650'></div>
-<script type="text/javascript">
-/*<![CDATA[*/
-(function () {
-  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-  if (window.ShopifyBuy) {
-    if (window.ShopifyBuy.UI) {
-      ShopifyBuyInit();
-    } else {
-      loadScript();
-    }
-  } else {
-    loadScript();
-  }
-  function loadScript() {
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = scriptURL;
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-    script.onload = ShopifyBuyInit;
-  }
-  function ShopifyBuyInit() {
-    var client = ShopifyBuy.buildClient({
-      domain: 'rresm3-dc.myshopify.com',
-      storefrontAccessToken: '75a2fcd7ba4ed0975a549853b96e4955',
-    });
-    ShopifyBuy.UI.onReady(client).then(function (ui) {
-      ui.createComponent('product', {
-        id: '15606556098641',
-        node: document.getElementById('product-component-1763129694650'),
-        moneyFormat: 'Rs.%20%7B%7Bamount%7D%7D',
-        options: {
-  "product": {
-    "styles": {
-      "product": {
-        "@media (min-width: 601px)": {
-          "max-width": "calc(25% - 20px)",
-          "margin-left": "20px",
-          "margin-bottom": "50px"
-        }
-      }
-    },
-    "text": {
-      "button": "Add to cart"
-    }
-  },
-  "productSet": {
-    "styles": {
-      "products": {
-        "@media (min-width: 601px)": {
-          "margin-left": "-20px"
-        }
-      }
-    }
-  },
-  "modalProduct": {
-    "contents": {
-      "img": false,
-      "imgWithCarousel": true,
-      "button": false,
-      "buttonWithQuantity": true
-    },
-    "styles": {
-      "product": {
-        "@media (min-width: 601px)": {
-          "max-width": "100%",
-          "margin-left": "0px",
-          "margin-bottom": "0px"
-        }
-      }
-    },
-    "text": {
-      "button": "Add to cart"
-    }
-  },
-  "option": {},
-  "cart": {
-    "text": {
-      "total": "Subtotal",
-      "button": "Checkout"
-    }
-  },
-  "toggle": {}
-},
-      });
-    });
-  }
-})();
-/*]]>*/
-</script>
 </body>
 
-
 </html>
-
-
-
-
