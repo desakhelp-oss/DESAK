@@ -191,14 +191,8 @@ body {
   font-weight: 800
 }
 
-#p {
-  border: 10px black;
-  padding: 5px;
-}
-
 .hero-content .subtext {
   color: white;
-  margin-top: 10px;
   font-size: 16px
 }
 
@@ -996,3 +990,4 @@ body {
 }
 
 /* end of styles */
+
