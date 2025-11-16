@@ -90,8 +90,9 @@ body {
   font-weight: 700;
   font-size: 1.8rem;
   text-decoration: none;
-  color: var(--black);
+  color: black;
   letter-spacing: 1.5px;
+
 }
 
 .nav-list {
@@ -102,7 +103,6 @@ body {
 
 .nav-actions {
   margin-left: 20px;
-  gap: 10px;
   border-color: white;
 }
 
@@ -112,7 +112,6 @@ body {
   font-weight: 600;
   position: relative;
   transition: var(--transition);
-  background-color: white;
 }
 
 /* ========== Navbar Icons ========== */
@@ -138,7 +137,7 @@ body {
   left: 0;
   width: 0%;
   height: 1px;
-  background: var(--accent);
+  background: var(--black);
   transition: width 0.3s ease;
 }
 
@@ -162,52 +161,42 @@ body {
 /* Hero */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 90vh;
   background: url("https://png.pngtree.com/background/20250122/original/pngtree-fashion-clothing-on-hangers-at-the-show-picture-image_15460073.jpg") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  color: black;
 }
 
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.2))
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   text-align: center;
-
+  top: -10px;
 }
 
 .hero-content h1 {
-  font-size: 56px;
+  font-size: 64px;
   letter-spacing: 4px;
-  margin: 0;
-  font-weight: 800
+  font-weight: 1000;
+  margin-bottom: 5px;
+  text-shadow:2px 3px #000;
 }
+
 
 .hero-content .subtext {
   color: white;
-  font-size: 16px
+  font-size: 16px;
 }
 
-/* spacing utilities */
-.space-24 {
-  height: 24px
-}
-
-.space-32 {
-  height: 32px
-}
-
-.space-40 {
-  height: 40px
-}
 
 /* Section header */
 .section {
@@ -494,8 +483,9 @@ body {
 
 .btn-primary {
   background: var(--text);
-  color: #000;
-  border: none;
+  color: white;
+  border-color: white;
+  border-width: 3px;
   padding: 12px;
   border-radius: 12px;
   font-weight: 800;
@@ -504,11 +494,13 @@ body {
 
 .btn-secondary {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-color: white;
+  border-width: 3px;
   padding: 10px;
   border-radius: 12px;
   color: var(--text);
   cursor: pointer
+
 }
 
 /* toast */
@@ -990,4 +982,3 @@ body {
 }
 
 /* end of styles */
-
